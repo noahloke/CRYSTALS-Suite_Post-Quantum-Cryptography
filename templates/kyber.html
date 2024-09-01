@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Explore CRYSTALS Suite</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #4AA1BA;
+    }
+    .header {
+        padding: 30px;
+        text-align: center;
+        background: #054770;
+        color: white;
+    }
+    .header h1 {
+        font-size: 40px;
+    }
+    .navbar {
+        overflow: hidden;
+        background-color: #054770;
+        text-align: center;
+    }
+    .navbar a {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+    .navbar a:hover {
+        background-color: #C9E3EA;
+        color: black;
+    }
+    .main {
+        color: white;
+        text-align: left;
+        background-color: #4AA1BA;
+        width: 50%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .footer {
+            background-color: #054770;
+            margin: 0;
+            padding: 0;
+    }
+    .footer-content {
+        color: white;
+        text-align: left;
+        width: 50%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <a href="/projects/explore-crystals">
+        <figure>
+            <img src="/static/kyber.png" style="width: 25vw; min-width: 330px;" />
+            <figcaption>
+                <a href="https://cryptojedi.org" style="color: white">Image Credit: Peter Schwabe</a>
+            </figcaption>
+        </figure>
+    </a>
+</div>
+
+<div class="navbar">
+    <a href="/projects/explore-crystals">Home</a>
+    <a href="/projects/explore-crystals/kyber">Kyber</a>
+    <a href="/projects/explore-crystals/dilithium">Dilithium</a>
+    <a href="/projects/explore-crystals/comparison">Modern Cryptography Comparison</a>
+</div>
+
+<div class="main">
+
+    <h2>CRYSTALS Kyber</h2>
+    
+    <p>
+        Kyber is an IND-CCA2-secure key encapsulation mechanism designed to be secure against attacks from both classical and quantum computers. 
+        This is paired with a public key encryption system, consisting of a public and secret key pair. 
+        It would typically encapsulate AES-256 bit keys for secure network communications. 
+        Its status as IND-CCA2 means that it has indistinguishability under an adaptive chosen ciphertext attack, meaning that its ciphertext does not reveal any useful information about the original plaintext (Jiang, 2018).
+    </p>
+
+    <p>Kyber has 3 different base parameter sets: Kyber-512, Kyber-768, and Kyber-1024. These implementations seek to match the security levels of AES-128, AES-192, and AES-256, respectively. 
+        There is also an additional variant for these parameter sets, Kyber-90s, which is implemented when hardware support for the symmetric primitives is available. 
+        It uses AES-256 in counter mode and SHA2 instead of SHAKE. This adds the parameter sets of Kyber-512-90s, Kyber-768-90s, and Kyber-1024-90s.
+        Below are the respective sizes of the secret key (sk), public key (pk), and ciphertext (ct), for each base parameter set.
+    <br />
+    
+    <h2>Kyber-512</h2>
+    
+    <figure>
+        <img src="/static/kyber512.png" width="100"/>
+        <figcaption>
+            <a href="https://pq-crystals.org/kyber/index.shtml" style="color: #032a3d">(CRYSTALS, 2022)</a>
+        </figcaption>
+    </figure>
+    
+    <h2>Kyber-768</h2>
+    
+    <figure>
+        <img src="/static/kyber768.png" width="100"/>
+        <figcaption>
+            <a href="https://pq-crystals.org/kyber/index.shtml" style="color: #032a3d">(CRYSTALS, 2022)</a>
+        </figcaption>
+    </figure>
+    
+    <h2>Kyber-1024</h2>
+    
+    <figure>
+        <img src="/static/kyber1024.png" width="100"/>
+        <figcaption>
+            <a href="https://pq-crystals.org/kyber/index.shtml" style="color: #032a3d">(CRYSTALS, 2022)</a>
+        </figcaption>
+    </figure>
+            
+</div>
+
+<div class="footer">
+    <div class="footer-content">
+        <h2>Sources:</h2>
+                        <li>
+                            <p>
+                                Avanzi, Roberto; Bos, Joppe; Ducas, Léo; Kiltz, Eike; Lepoint, Tancrède; Lyubashevsky, Vadim; Schanck, John M.; Schwabe, Peter; Seiler, Gregor; Stehle, Damien. “CRYSTALS.” Cryptographic Suite for Algebraic Lattices, 25 Feb. 2022, 
+                                <a href="https://pq-crystals.org/kyber/index.shtml" style="color: white">
+                                    pq-crystals.org/kyber/index.shtml.
+                                </a>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Jiang, Haodong, et al. “IND-CCA-Secure Key Encapsulation Mechanism in the Quantum Random Oracle Model, Revisited.” Springer, 19 Aug. 2018, pp. 96–125, 
+                                <a href="https://link.springer.com/chapter/10.1007/978-3-319-96878-0_4" style="color: white">
+                                    link.springer.com/chapter/10.1007/978-3-319-96878-0_4.
+                                </a>
+                            </p>
+                        </li>
+                    </ul>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Explore CRYSTALS Suite</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #4AA1BA;
+        }
+        .header {
+            padding: 30px;
+            text-align: center;
+            background: #054770;
+            color: white;
+        }
+        .header h1 {
+            font-size: 40px;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #054770;
+            text-align: center;
+        }
+        .navbar a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #C9E3EA;
+            color: black;
+        }
+        .main {
+            color: white;
+            text-align: left;
+            background-color: #4AA1BA;
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .footer {
+            background-color: #054770;
+            margin: 0;
+            padding: 0;
+        }
+        .footer-content {
+            color: white;
+            text-align: left;
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        </style>
+    </head>
+    <body>
+
+        <div class="header">
+            <a href="/projects/explore-crystals">
+                <figure>
+                    <img src="/static/crystals.png" style="width: 25vw; min-width: 330px;" />
+                    <figcaption>
+                        <a href="https://cryptojedi.org" style="color: white">Image Credit: Peter Schwabe</a>
+                    </figcaption>
+                </figure>
+            </a>
+        </div>
+
+        <div class="navbar">
+            <a href="/projects/explore-crystals">Home</a>
+            <a href="/projects/explore-crystals/kyber">Kyber</a>
+            <a href="/projects/explore-crystals/dilithium">Dilithium</a>
+            <a href="/projects/explore-crystals/comparison">Modern Cryptography Comparison</a>
+        </div>
+
+        <div class="main">
+
+            <h2>Welcome</h2>
+            <p>
+                This website is a student research project on the 
+                <a href="https://pq-crystals.org/index.shtml" style="color: #032a3d">
+                    CRYSTALS (Cryptographic Suite for Algebraic Lattices)
+                </a>
+                post-quantum cryptographic package.
+                 Both of its cryptographic primitives, Kyber, a key-encapsulation mechanism, and Dilithium, a digital signature algorithm, were chosen by NIST 
+                 (National Institute of Standards and Technology) for PQC Standardization in 2022. These algorithms are designed to withstand cryptanalytic attacks 
+                 by current and future quantum computers, as well as classical computers. They both rely on the hardness of mathematical problems over module lattices.
+            </p>
+
+            <h4>CRYSTALS Team</h4>
+            <ul>
+                <li>
+                    Roberto Avanzi, 
+                    <a href="https://www.arm.com/" style="color: #032a3d">
+                        ARM Limited (DE)
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://joppebos.com/" style="color: #032a3d">
+                        Joppe Bos
+                    </a>
+                    , 
+                    <a href="https://www.nxp.com/" style="color: #032a3d">
+                        NXP Semiconductors (BE) 
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://homepages.cwi.nl/~ducas/" style="color: #032a3d">
+                        Léo Ducas
+                    </a>
+                    , 
+                    <a href="https://www.cwi.nl/" style="color: #032a3d">
+                        CWI Amsterdam (NL)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="http://www.crypto.rub.de/staff/kiltz.html.en" style="color: #032a3d">
+                        Eike Kiltz
+                    </a>
+                    , 
+                    <a href="https://www.rub.de/" style="color: #032a3d">
+                        Ruhr University Bochum (DE)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://tlepoint.github.io/" style="color: #032a3d">
+                        Tancrède Lepoint
+                    </a>
+                    , 
+                    <a href="https://www.sri.com/" style="color: #032a3d">
+                        SRI International (US)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="http://researcher.watson.ibm.com/researcher/view.php?person=zurich-VAD" style="color: #032a3d">
+                        Vadim Lyubashevsky
+                    </a>
+                    , 
+                    <a href="https://www.zurich.ibm.com/" style="color: #032a3d">
+                        IBM Research Zurich (CH)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://jmschanck.info/" style="color: #032a3d">
+                        John M. Schanck
+                    </a>
+                    , 
+                    <a href="https://uwaterloo.ca/" style="color: #032a3d">
+                        University of Waterloo (CA)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://cryptojedi.org/" style="color: #032a3d">
+                        Peter Schwabe
+                    </a>
+                    , 
+                    <a href="https://www.mpi-sp.org/" style="color: #032a3d">
+                        MPI-SP (DE)
+                    </a>
+                     & 
+                    <a href="https://www.ru.nl/" style="color: #032a3d">
+                        Radboud University (NL)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://www.crypto.ethz.ch/~seiler/" style="color: #032a3d">
+                        Gregor Seiler
+                    </a>
+                    , 
+                    <a href="https://www.zurich.ibm.com/" style="color: #032a3d">
+                        IBM Research Zurich (CH)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="http://perso.ens-lyon.fr/damien.stehle/" style="color: #032a3d">
+                        Damien Stehle
+                    </a>
+                    , 
+                    <a href="https://www.ens-lyon.fr/" style="color: #032a3d">
+                        ENS Lyon (FR)
+                    </a>
+                </li>
+            </ul>
+
+            <br />
+
+            <h2>Methodology: Lattice Based Cryptography</h2>
+            
+            <p>A lattice is a grid-like structure in n dimensions, generated with points created from integer combinations of a set of vectors and their opposites.</p>
+            
+            <p>The common 2D coordinate plane with points at integer coordinates can also be thought of as a lattice formed from the set of vectors (0, 1) and (1, 0). Each point in this lattice can be reached using a repetitive combination from the given set of vectors and their respective opposites. The set of vectors that generated the lattice are the secret set. A public set could be (3, 1) and (1, 2) (with their opposites as a given: (-3, -1), (-1, -2)). This set can still can reach every point on the lattice but it will be more difficult.</p>
+            
+            <img src="/static/lattice.png" width="250"/>
+            
+            <p>Blue: (0, -1) + (0, -1) + (0, -1) + (1, 0) = (1, -3)</p>
+            <p>Red: (3, 1) + (-1, -2) + (3, 1) + (-1, -2) + (-1, -2) + (-3, -1) + (1, 2) = (1, -3)</p>
+            
+            <br />
+            
+            <h2>Reliance on the Hardness of the Mathematical Problems:</h2>
+
+            <p>Shortest Vector Problem (SVP): shortest possible combination of public set of vectors from the origin to target point</p>
+            
+            <p>Closest Vector Problem (CVP): find the lattice point closest to the target point, must generate lattice with public set and compare all surrounding points</p>
+            
+            <p>Kyber - Learning With Errors (LWE): must solve a set of linear equations (vectors) with small random noise (dimensional offset) added</p>
+            
+            <p>Dilithium - Module Learning With Errors (MLWE): uses modules instead of vectors like in LWE. While a lattice is formed over integers, a module lattice is formed over a ring of integers.</p>
+            
+            <br />
+            
+            <h2>NIST PQC Standarization 2022:</h2>
+
+            <p>Both CRYSTALS algorithms (Lattice Based) were prioritized for their security and performance</p>
+            
+            <figure>
+                <img src="/static/nist2022.png" width="500"/>
+                <figcaption>
+                    <a href="https://www.nist.gov/news-events/news/2022/07/pqc-standardization-process-announcing-four-candidates-be-standardized-plus" style="color: #032a3d">(NIST, 2022)</a>
+                </figcaption>
+            </figure>
+            
+            <p>FALCON (Lattice Based) – smaller signature than Dilithium</p>
+            
+            <p>SPHINCS+ (Hash Based) – implementation to not fully rely on lattices</p>
+
+        </div>
+
+        <div class="footer">
+            <div class="footer-content">
+                <h2>Sources:</h2>
+                    <ul>
+                        <li>
+                            <p>
+                                Avanzi, Roberto; Bos, Joppe; Ducas, Léo; Kiltz, Eike; Lepoint, Tancrède; Lyubashevsky, Vadim; Schanck, John M.; Schwabe, Peter; Seiler, Gregor; Stehle, Damien. “CRYSTALS.” Cryptographic Suite for Algebraic Lattices, 25 Feb. 2022, 
+                                <a href="https://pq-crystals.org/index.shtml" style="color: white">
+                                    pq-crystals.org/index.shtml.
+                                </a>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                “PQC Standardization Process: Announcing Four Candidates to Be Standardized, plus Fourth Round Candidates.” NIST, 5 July 2022,
+                                <a href="https://www.nist.gov/news-events/news/2022/07/pqc-standardization-process-announcing-four-candidates-be-standardized-plus" style="color: white">
+                                    www.nist.gov/news-events/news/2022/07/pqc-standardization-process-announcing-four-candidates-be-standardized-plus.
+                                </a>
+                            </p>    
+                        </li>
+                    </ul>
+            </div>
+        </div>
+
+    </body>
+
+</html>

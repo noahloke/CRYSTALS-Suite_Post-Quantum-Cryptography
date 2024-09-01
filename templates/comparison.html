@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Explore CRYSTALS Suite</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #4AA1BA;
+        }
+        form {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+        }
+        label, input, button {
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+            margin: 10px 0;
+        }
+        input, button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #054770;
+            color: white;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #C9E3EA;
+            color: black;
+        }
+        pre {
+            padding: 15px;
+            width: 100%;
+            max-width: none;
+            overflow-x: auto;
+            margin-top: 20px;
+            text-align: left;
+            display: block;
+        }
+        .header {
+            padding: 30px;
+            text-align: center;
+            background: #054770;
+            color: white;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #054770;
+            text-align: center;
+        }
+        .navbar a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #C9E3EA;
+            color: black;
+        }
+        .main {
+            color: white;
+            background-color: #4AA1BA;
+            width: 95%;
+            margin: 0 auto;
+	        padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .center-h2 {
+            text-align: center;
+        }
+        .footer {
+            background-color: #054770;
+            margin: 0;
+            padding: 0;
+        }
+        .footer-content {
+            color: white;
+            text-align: left;
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+	table {
+	    width: 30%;
+	    border-collapse: collapse;
+	    margin-top: 20px;
+	}
+
+	.center {
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+	
+	th, td {
+	    border: 1px solid #054770;
+	    padding: 8px;
+	    text-align: center;
+	}
+	
+	/* Header row */
+	th {
+	    background-color: #054770;
+	    color: white;
+	    border-color: white;
+	}
+	
+	/* First column */
+	td:first-child {
+	    background-color: #054770;
+	    color: white;
+	    border-color: white;
+	}
+	
+	/* Kyber and RSA row styles */
+	tr:nth-child(2) td:first-child, tr:nth-child(3) td:first-child {
+	    background-color: #054770;
+	    color: white;
+	}
+	
+	/* Kyber and RSA values */
+	tr:nth-child(2) td:not(:first-child), tr:nth-child(3) td:not(:first-child) {
+	    background-color: white;
+	    color: #054770;
+	}
+	
+	/* Table lines in the first row and first column */
+	table th, table td:first-child {
+	    border-color: white;
+	}
+	#comparisonTestOutput {
+            display: none;
+        }
+	.center-paragraph {
+	    width: 50%;
+	    margin: 0 auto;
+	}
+	.row {
+    display: flex;
+    width: 90%;
+    justify-content: space-between; /* Adjust alignment of columns */
+    overflow-x: auto; /* Enable horizontal scrolling for the row */
+  }
+
+  .column {
+    flex: 0 0 auto; /* Fixed size column */
+    width: 200px; /* Fixed size column */
+    margin-right: 30px; /* Adjust spacing between columns */
+    border: 1px solid #ddd; /* Just for visualization */
+    padding: 10px; /* Just for visualization */
+    overflow-y: auto; /* Enable vertical scrolling for the column */
+  }
+
+  .item {
+    width: 25%; /* Set width of items */
+    padding: 10px; /* Adjust padding as needed */
+    margin-bottom: 10px; /* Adjust margin bottom as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+    </style>
+    <script>
+	function parseAndCreateTable() {
+	    const preText = document.getElementById('comparisonTestOutput').innerText;
+	    const regex = /\d+\.\d+/g;
+	    const matches = preText.match(regex);
+	    if (matches.length >= 6) {
+	        const kyber_keypair_time = matches[0];
+	        const kyber_encrypt_time = matches[1];
+	        const kyber_decrypt_time = matches[2];
+	        const rsa_keypair_time = matches[3];
+	        const rsa_encrypt_time = matches[4];
+	        const rsa_decrypt_time = matches[5];
+	
+	        const table = `
+	            <table class = "center">
+	                <tr>
+	                    <th></th>
+	                    <th>Keypair Avg. Time (s)</th>
+	                    <th>Encryption Avg. Time (s)</th>
+	                    <th>Decryption Avg. Time (s)</th>
+	                </tr>
+	                <tr>
+	                    <td>Kyber</td>
+	                    <td>${kyber_keypair_time}</td>
+	                    <td>${kyber_encrypt_time}</td>
+	                    <td>${kyber_decrypt_time}</td>
+	                </tr>
+	                <tr>
+	                    <td>RSA</td>
+	                    <td>${rsa_keypair_time}</td>
+	                    <td>${rsa_encrypt_time}</td>
+	                    <td>${rsa_decrypt_time}</td>
+	                </tr>
+	            </table>
+	        `;
+	
+	        const tableContainer = document.getElementById('tableContainer');
+	        tableContainer.innerHTML = table;
+	    }
+	}
+	    
+        $(document).ready(function() {
+            $('#generateAESKeyButton').click(function(event) {
+                event.preventDefault();
+                $.post({
+                    url: '/projects/explore-crystals/comparison', 
+                    data: { action: 'generateAESKey' },
+                    success: function(response) {
+                        $('#aes256Key').text(response.aes256Key);
+                    }
+                });
+            });
+    
+            $('#aesEncryptButton').click(function(event) {
+                event.preventDefault();
+                $.post({
+                    url: '/projects/explore-crystals/comparison',
+                    data: {
+                        action: 'aesEncrypt',
+                        message: $('#message').val(),
+                        aes256Key2: $('#aes256Key2').val()
+                    },
+                    success: function(response) {
+                        $('#aesEncryptOutput').text(response.aesEncryptOutput);
+                    }
+                });
+            });
+    
+            $('#aesDecryptButton').click(function(event) {
+                event.preventDefault();
+                $.post({
+                    url: '/projects/explore-crystals/comparison',
+                    data: {
+                        action: 'aesDecrypt',
+                        ciphertext: $('#ciphertext').val(),
+                        aes256Key3: $('#aes256Key3').val()
+                    },
+                    success: function(response) {
+                        $('#aesDecryptOutput').text(response.aesDecryptOutput);
+                    }
+                });
+            });
+
+	    $('#generateRSAKeysButton').click(function(event) {
+                event.preventDefault();
+                $.post({
+                    url: '/projects/explore-crystals/comparison', 
+                    data: { action: 'generateRSAKeys' },
+                    success: function(response) {
+                        $('#rsaKeys').text(response.rsaKeys);
+                    }
+                });
+            });
+
+	    $('#rsaEncryptButton').click(function(event) {
+                event.preventDefault();
+                $.post({
+                    url: '/projects/explore-crystals/comparison',
+                    data: {
+                        action: 'rsaEncrypt',
+                        aes256KeyForRSA: $('#aes256KeyForRSA').val(),
+                        rsaPublicKey: $('#rsaPublicKey').val()
+                    },
+                    success: function(response) {
+                        $('#rsaEncryptOutput').text(response.rsaEncryptOutput);
+                    }
+                });
+            });
+
+	    $('#rsaDecryptButton').click(function(event) {
+                event.preventDefault();
+                $.post({
+                    url: '/projects/explore-crystals/comparison',
+                    data: {
+                        action: 'rsaDecrypt',
+                        rsaEncryptedAESKey: $('#rsaEncryptedAESKey').val(),
+                        rsaPrivateKey: $('#rsaPrivateKey').val()
+                    },
+                    success: function(response) {
+                        $('#rsaDecryptOutput').text(response.rsaDecryptOutput);
+                    }
+                });
+            });
+
+	    $('#dilithiumTestButton').click(function(event) {
+                event.preventDefault();
+                $.post({
+                    url: '/projects/explore-crystals/comparison', 
+                    data: { action: 'dilithiumTest' },
+                    success: function(response) {
+                        $('#dilithiumTestOutput').text(response.dilithiumTestOutput);
+                    }
+                });
+            });
+
+	    $('#kyberTestButton').click(function(event) {
+                event.preventDefault();
+                $.post({
+                    url: '/projects/explore-crystals/comparison',
+                    data: {
+                        action: 'kyberTest',
+                        userInput: $('#userInput').val()
+                    },
+                    success: function(response) {
+                        $('#kyberTestOutput').text(response.kyberTestOutput);
+                    }
+                });
+            });
+    
+            $('#comparisonTestButton').click(function(event) {
+                event.preventDefault();
+                $.post({
+                    url: '/projects/explore-crystals/comparison',
+                    data: {
+                        action: 'comparisonTest',
+                        iterations: $('#iterations').val()
+                    },
+                    success: function(response) {
+                        $('#comparisonTestOutput').text(response.comparisonTestOutput);
+			parseAndCreateTable();
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <a href="/projects/explore-crystals">
+        <figure>
+            <img src="/static/crystals.png" style="width: 25vw; min-width: 330px;" />
+            <figcaption>
+                <a href="https://cryptojedi.org" style="color: white">Image Credit: Peter Schwabe</a>
+            </figcaption>
+        </figure>
+    </a>
+</div>
+
+<div class="navbar">
+    <a href="/projects/explore-crystals">Home</a>
+    <a href="/projects/explore-crystals/kyber">Kyber</a>
+    <a href="/projects/explore-crystals/dilithium">Dilithium</a>
+    <a href="/projects/explore-crystals/comparison">Modern Cryptography Comparison</a>
+</div>
+
+<div class="main">
+    <div class="center-h1">
+        <h1>AES (Advanced Encryption Standard)</h1>
+    </div>
+
+    <p class = "center-paragraph">
+    AES is a widely used symmetric encryption algorithm established by the National Institute of Standards and Technology (NIST) in 2001. It has since been adopted internationally as the primary encryption standard due to its security and efficiency. 
+    </p>
+
+    <div class="row">
+  	<div class="item">
+		<div class="center-h3">
+        <h3>AES Key Generation</h3>
+    </div>
+	
+    <form>
+        <button id="generateAESKeyButton">Generate AES-256 Key</button>
+    </form>
+    <pre id="aes256Key"></pre>
+	</div>
+	    
+  	<div class="item">
+		<div class="center-h3">
+        <h3>AES Encryption</h3>
+    </div>
+    <form>
+        <label for="message">Please enter your message:</label>
+        <input type="text" id="message" required>
+        <label for="aes256Key2">Please enter your aes key:</label>
+        <input type="text" id="aes256Key2" required>
+        <button id="aesEncryptButton">Run Test</button>
+    </form>
+    <pre id="aesEncryptOutput"></pre>
+	</div>
+	    
+  	<div class="item">
+		<div class="center-h3">
+        <h3>AES Decryption</h3>
+    </div>
+    <form>
+        <label for="ciphertext">Please enter your ciphertext:</label>
+        <input type="text" id="ciphertext" required>
+        <label for="aes256Key3">Please enter your aes key:</label>
+        <input type="text" id="aes256Key3" required>
+        <button id="aesDecryptButton">Run Test</button>
+    </form>
+    <pre id="aesDecryptOutput"></pre>
+	</div>
+    </div>
+	    
+    <div class="center-h1">
+        <h1>RSA (Rivest–Shamir–Adleman)</h1>
+    </div>
+
+    <p class = "center-paragraph">
+    RSA is a widely used asymmetric cryptographic algorithm named after its creators, Ron Rivest, Adi Shamir, and Leonard Adleman, who published it in 1977. It is primarily used for key exchange and digital signatures.
+    </p>
+
+    <div class="row">
+  	<div class="item">
+		<div class="center-h3">
+        <h3>RSA Keys Generation</h3>
+    </div>
+    <form>
+        <button id="generateRSAKeysButton">Generate RSA Keys</button>
+    </form>
+    <pre id="rsaKeys"></pre>
+	</div>
+	    
+  	<div class="item">
+		<div class="center-h3">
+        <h3>RSA Encryption</h3>
+    </div>
+    <form>
+        <label for="aes256KeyForRSA">Please enter your AES-256 key:</label>
+        <input type="text" id="aes256KeyForRSA" required>
+        <label for="rsaPublicKey">Please enter your RSA public key:</label>
+        <input type="text" id="rsaPublicKey" required>
+        <button id="rsaEncryptButton">Run Test</button>
+    </form>
+    <pre id="rsaEncryptOutput"></pre>
+	</div>
+	    
+  	<div class="item">
+		<div class="center-h3">
+        <h3>RSA Decryption</h3>
+    </div>
+    <form>
+        <label for="rsaEncryptedAESKey">Please enter your Encrypted AES-256 key:</label>
+        <input type="text" id="rsaEncryptedAESKey" required>
+        <label for="rsaPrivateKey">Please enter your RSA private key:</label>
+        <input type="text" id="rsaPrivateKey" required>
+        <button id="rsaDecryptButton">Run Test</button>
+    </form>
+    <pre id="rsaDecryptOutput"></pre>
+	</div>
+    </div>
+
+    <div class="center-h1">
+        <h1>CRYSTALS Suite (Post Quantum Cryptography)</h1>
+    </div>
+
+    <div class="center-h3">
+        <h3>CRYSTALS-KYBER Key Exchange and Communication Test</h3>
+    </div>
+    <form>
+        <label for="userInput">Please enter your message:</label>
+        <input type="text" id="userInput" required>
+        <button id="kyberTestButton">Run Test</button>
+    </form>
+    <pre id="kyberTestOutput"></pre>
+
+    <div class="center-h3">
+        <h3>CRYSTALS-Dilithium Digital Signature Test</h3>
+    </div>
+    <form>
+        <button id="dilithiumTestButton">Run Test</button>
+    </form>
+    <pre id="dilithiumTestOutput"></pre>
+	
+    <div class="center-h3">
+        <h3>RSA vs Kyber Key Encryption and Decryption Comparison Test</h3>
+    </div>
+
+    <p class = "center-paragraph">
+    This program compares RSA's and Kyber's average function execution times for an AES-256 key exchange. Each iteration, a random AES-256 key is generated, then both algorithms generate a keypair, encrypt the key, decrypt the key, then compare the original key with the decrypted or received key. If the keys match, then the iteration is successful and the measured execution times are valid and incorporated into the overall average.
+    </p>
+	
+    <form>
+        <label for="iterations">Please enter the number of iterations you would like to run:</label>
+        <input type="text" id="iterations" required>
+        <button id="comparisonTestButton">Run Test</button>
+    </form>
+    
+    <pre id="comparisonTestOutput"></pre>
+    <pre id="tableContainer"></pre>
+
+</div>
+
+</body>
+</html>
