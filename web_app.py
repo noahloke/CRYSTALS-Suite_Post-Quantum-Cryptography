@@ -2,6 +2,9 @@ from flask import Flask, request, render_template, jsonify
 import subprocess
 import re
 
+def sanitize(input):
+    return re.sub(r'[^\w\s]', '', input)
+
 web_app = Flask(__name__)
 
 @web_app.route('/projects/explore-crystals')
@@ -36,14 +39,14 @@ def comparison():
             aes256Key = process.stdout.strip()
 
         elif action == 'aesEncrypt':
-            message = request.form.get('message', '')
-            aes256Key2 = request.form.get('aes256Key2', '')
+            message = sanitize(request.form.get('message', ''))
+            aes256Key2 = sanitize(request.form.get('aes256Key2', ''))
             process = subprocess.run(['executables/aes_encrypt', message, aes256Key2], capture_output=True, text=True)
             aesEncryptOutput = process.stdout.strip()
 
         elif action == 'aesDecrypt':
-            ciphertext = request.form.get('ciphertext', '')
-            aes256Key3 = request.form.get('aes256Key3', '')
+            ciphertext = sanitize(request.form.get('ciphertext', ''))
+            aes256Key3 = sanitize(request.form.get('aes256Key3', ''))
             process = subprocess.run(['executables/aes_decrypt', ciphertext, aes256Key3], capture_output=True, text=True)
             aesDecryptOutput = process.stdout.strip()
 
@@ -52,14 +55,14 @@ def comparison():
             rsaKeys = process.stdout.strip()
 
         elif action == 'rsaEncrypt':
-            aes256KeyForRSA = request.form.get('aes256KeyForRSA', '')
-            rsaPublicKey = request.form.get('rsaPublicKey', '')
+            aes256KeyForRSA = sanitize(request.form.get('aes256KeyForRSA', ''))
+            rsaPublicKey = sanitize(request.form.get('rsaPublicKey', ''))
             process = subprocess.run(['executables/rsa_encrypt', aes256KeyForRSA, rsaPublicKey], capture_output=True, text=True)
             rsaEncryptOutput = process.stdout.strip()
 
         elif action == 'rsaDecrypt':
-            rsaEncryptedAESKey = request.form.get('rsaEncryptedAESKey', '')
-            rsaPrivateKey = request.form.get('rsaPrivateKey', '')
+            rsaEncryptedAESKey = sanitize(request.form.get('rsaEncryptedAESKey', ''))
+            rsaPrivateKey = sanitize(request.form.get('rsaPrivateKey', ''))
             process = subprocess.run(['executables/rsa_decrypt', rsaEncryptedAESKey, rsaPrivateKey], capture_output=True, text=True)
             rsaDecryptOutput = process.stdout.strip()
 
@@ -68,12 +71,12 @@ def comparison():
             dilithiumTestOutput = process.stdout.strip()
 
         elif action == 'kyberTest':
-            userInput = request.form.get('userInput', '')
+            userInput = sanitize(request.form.get('userInput', ''))
             process = subprocess.run(['executables/kyber_test1024', userInput], capture_output=True, text=True)
             kyberTestOutput = process.stdout.strip()
         
         elif action == 'comparisonTest':
-            iterations = request.form.get('iterations', '')
+            iterations = sanitize(request.form.get('iterations', ''))
             process = subprocess.run(['executables/comparison_test1024', iterations], capture_output=True, text=True)
             comparisonTestOutput = process.stdout.strip()
         
