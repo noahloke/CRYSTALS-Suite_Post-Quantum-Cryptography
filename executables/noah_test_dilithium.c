@@ -14,10 +14,7 @@ int main(void) {
     
     uint8_t m2[MLEN]; // message to be verified
     printf("Allocating space for a received message of %d bytes: Success\n", MLEN);
-    
-    //uint8_t m[MLEN + CRYPTO_BYTES]; // message
-    //uint8_t m2[MLEN + CRYPTO_BYTES]; // message to be verified
-    
+        
     uint8_t sm[MLEN + CRYPTO_BYTES]; // signed message
     printf("Allocating space for a signed message of %d bytes: Success\n", MLEN + CRYPTO_BYTES);
     
@@ -93,6 +90,3 @@ int main(void) {
 
     return 0;
 }
-
-//uint8_t m[MLEN + CRYPTO_BYTES]; // message
-//uint8_t m2[MLEN + CRYPTO_BYTES]; // message to be verified
