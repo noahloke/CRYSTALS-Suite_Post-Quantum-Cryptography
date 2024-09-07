@@ -1,1 +1,1 @@
-(https://noahloke.com/projects/explore-crystals/comparison)
+https://noahloke.com/projects/explore-crystals/comparison
