@@ -1,3 +1,3 @@
-https://noahloke.com/projects/explore-crystals/comparison
+https://noahloke.com/projects/explore-crystals
 
 <img src="Screenshots/demo.png">
