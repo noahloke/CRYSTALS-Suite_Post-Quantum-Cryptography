@@ -163,10 +163,6 @@ int main() {
 
     int rsa_decrypted_aes_key_len = rsa_decrypt(private_key, rsa_encrypted_aes_key, rsa_encrypted_aes_key_len, &rsa_decrypted_aes_key);
 
-    if (memcmp(test_aes_key, rsa_decrypted_aes_key, AES_KEY_SIZE) == 0) {
-        //printf("test_aes_key == rsa_decrypted_aes_key: Success!\n");
-    }
-
     free(rsa_encrypted_aes_key);
     free(rsa_decrypted_aes_key);
 
