@@ -81,39 +81,21 @@ int main(int argc, char *argv[]) {
     uint8_t aes_key[CRYPTO_BYTES];
     hex_to_bytes(hex_aes_key, aes_key, CRYPTO_BYTES);
 
-    //randombytes(aes_key, CRYPTO_BYTES);
-    //"f97b06ab10f76f6d79bb8c0fb55c522ff3f795d569295a6b2a17cc8898d8440f"
-
     // Generate a random IV
     const char *hex_iv = "81fe99c1cb4e33adc525b111774680da";
     unsigned char iv[AES_BLOCK_SIZE] = {0};
 
     hex_to_bytes(hex_iv, iv, AES_BLOCK_SIZE);
 
-    /*
-    RAND_bytes(iv, sizeof(iv));
-    printf("IV (Hexadecimal): ");
-    for(size_t i = 0; i < sizeof(iv); i++) {
-        printf("%02x", iv[i]);
-    }
-    printf("\n");
-    */
-
     const char *hex_ciphertext = argv[1];
     int ciphertext_len = strlen(hex_ciphertext) / 2;
 
     unsigned char ciphertext[ciphertext_len];
-    //"8fbe82dd1f1024c059bec862cf990bf3"
     hex_to_bytes(hex_ciphertext, ciphertext, ciphertext_len);
 
     unsigned char decryptedtext[1024];
-
-
     int decryptedtext_len = aes_decrypt(ciphertext, ciphertext_len, aes_key, iv, decryptedtext);
-    
-    // Add a NULL terminator to the decrypted text
     decryptedtext[decryptedtext_len] = '\0';
-
 
     printf("The Output is: \"%s\"\n\n", decryptedtext);
 
