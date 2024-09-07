@@ -145,9 +145,7 @@ int main(int argc, char *argv[]) {
     temp_start = clock();
     if (crypto_kem_keypair(personA_pk, personA_sk) == 0) {
         temp_end = clock();
-        //printf("%-200s", "Person A generates a public/private key pair: Success");
         seconds = ((double) (temp_end - temp_start)) / CLOCKS_PER_SEC;
-        //printf("Execution Time: %f seconds\n", seconds);
         printf("%-200sExecution Time: %f seconds\n", "Person A generates a public/private key pair: Success", seconds);
     } else {
         temp_end = clock();
@@ -180,7 +178,6 @@ int main(int argc, char *argv[]) {
     temp_start = clock();
     if (crypto_kem_enc(ct, shared_aes_key, personA_pk) == 0) {
         temp_end = clock();
-        //printf("%-200s", "Person B uses Person A's public key to encapsulate the shared AES key: Success");
         seconds = ((double) (temp_end - temp_start)) / CLOCKS_PER_SEC;
         printf("%-200sExecution Time: %f seconds\n", "Person B uses Person A's public key to encapsulate the shared AES key: Success", seconds);
     } else {
@@ -230,7 +227,7 @@ int main(int argc, char *argv[]) {
     unsigned char ciphertext[1024];
     unsigned char decryptedtext[1024];
 
-    //Input Sanitization
+    // Input Sanitization
     size_t input_length = strlen((char *)plaintext);
 
     // Check input size
@@ -251,7 +248,6 @@ int main(int argc, char *argv[]) {
     temp_start = clock();
     int ciphertext_len = aes_encrypt(plaintext, plaintext_len, shared_aes_key, iv, ciphertext);
     temp_end = clock();
-    //printf("%-200s", "Person A encrypts the user input using the shared key: Success");
     seconds = ((double) (temp_end - temp_start)) / CLOCKS_PER_SEC;
     printf("%-200sExecution Time: %f seconds\n", "Person A encrypts the user input using the shared key: Success", seconds);
 
@@ -271,7 +267,6 @@ int main(int argc, char *argv[]) {
     // Add a NULL terminator to the decrypted text
     decryptedtext[decryptedtext_len] = '\0';
 
-    //printf("%-200s", "Person B decrypts the encrypted user input using the shared key: Success");
     seconds = ((double) (temp_end - temp_start)) / CLOCKS_PER_SEC;
     printf("%-200sExecution Time: %f seconds\n", "Person B decrypts the encrypted user input using the shared key: Success", seconds);
 
