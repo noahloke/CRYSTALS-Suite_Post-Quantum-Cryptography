@@ -165,15 +165,5 @@ int main(int argc, char *argv[]) {
     printf("| RSA                  | %21f | %24f | %24f |\n", rsa_keypair_time, rsa_encrypt_time, rsa_decrypt_time);
     printf("+----------------------+-----------------------+--------------------------+--------------------------+\n");
 
-    /*
-        printf("#\n");  // Marker to indicate the start of important data
-        printf("%f\n", kyber_keypair_time);
-        printf("%f\n", kyber_encrypt_time);
-        printf("%f\n", kyber_decrypt_time);
-        printf("%f\n", rsa_keypair_time);
-        printf("%f\n", rsa_encrypt_time);
-        printf("%f\n", rsa_decrypt_time);
-    */
-
     return 0;
 }
